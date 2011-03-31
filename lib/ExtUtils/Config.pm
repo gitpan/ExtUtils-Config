@@ -1,6 +1,6 @@
 package ExtUtils::Config;
 BEGIN {
-  $ExtUtils::Config::VERSION = '0.001';
+  $ExtUtils::Config::VERSION = '0.002';
 }
 
 use strict;
@@ -8,10 +8,10 @@ use warnings;
 use Config;
 
 sub new {
-	my ($pack, %args) = @_;
+	my ($pack, $args) = @_;
 	return bless {
 		stack => {},
-		values => $args{values} || {},
+		values => $args || {},
 	}, $pack;
 }
 
@@ -68,7 +68,12 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.001
+version 0.002
+
+=head1 SYNOPSIS
+
+ my $config = ExtUtils::Config->new();
+ $config->set('installsitelib', "$ENV{HOME}/lib");
 
 =head1 DESCRIPTION
 
@@ -76,9 +81,9 @@ ExtUtils::Config is an abstraction around the %Config hash.
 
 =head1 METHODS
 
-=head2 new
+=head2 new(\%config)
 
-Create a new ExtUtils::Config object.
+Create a new ExtUtils::Config object. The values in C<\%config> are used to initialize the object.
 
 =head2 get($key)
 
@@ -103,11 +108,6 @@ Get a hashref of all overridden values.
 =head2 all_config
 
 Get a hashref of the complete configuration, including overrides.
-
-=head1 SYNOPSYS
-
- my $config = ExtUtils::Config->new();
- $config->set('installsitelib', "$ENV{HOME}/lib");
 
 =head1 AUTHORS
 
