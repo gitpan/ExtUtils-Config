@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.63.
+signed via the Module::Signature module, version 0.68.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,23 +14,24 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 04417919c1388ce53cd9c00eedc9330461d898c4 Changes
-SHA1 55f675a05cc52ef4343ad7c7e67d0873ce238635 LICENSE
-SHA1 fca2c8616f8a60c9a54d5cf1897fd1eb4e33e2d2 MANIFEST
-SHA1 2b1a4ab3aa07a62021b773c3afb97fd88a968f95 META.json
-SHA1 f42fb9ef2c80d22b942407c586bcb75bead4d020 META.yml
-SHA1 1f12358ce7a93f06770417d2f3558fc0c0e814a9 Makefile.PL
-SHA1 5b2346b4553fd2613fd63af74fa64d1e38b50c7e README
-SHA1 e9174ac06dac8d0f8858d3578744f8f062cbe374 dist.ini
-SHA1 026c98195acf61ce29ae6ea0e466abac2adba9c5 lib/ExtUtils/Config.pm
-SHA1 eeacc1182614e61ab88ffae31ccff697167ac604 t/basics.t
-SHA1 961a1e2c92d836c8cad2d34b784cbc75345dec63 t/release-kwalitee.t
+SHA1 736627170fe72a9976feba15954f4e1c5fcbae03 Changes
+SHA1 93ac64f97e64eca0104bb6aabd6692efe94b964e LICENSE
+SHA1 fdc6665d8764f09e46b990f40fbd8e87380b816a MANIFEST
+SHA1 436ade208da1c2949fe7979ac5016bdb3e73d02b META.json
+SHA1 aea7f73b1b98038058ba139361208ea4f128c49e META.yml
+SHA1 de1cc65d2b825ef5d2a7e995343cc42d5c6759f3 Makefile.PL
+SHA1 2272af3fbd6848bd580a26f69e250ce9c19de17a README
+SHA1 0b7414713e993e4e70c69be6fc5df3204334f2b4 dist.ini
+SHA1 7769e78346dfdc3f6360fd2628dce63da1bb0d7a lib/ExtUtils/Config.pm
+SHA1 14863e63ebceb712fe78ec64e52543a2e7909716 t/00-compile.t
+SHA1 8dbfe209fac56441ee84c559af39ee0a5e943238 t/basics.t
+SHA1 6ea81e3865946a14536f97ccc65fee4b218c8148 t/release-kwalitee.t
 SHA1 9433c240fe590bc404ab68ff63984df763e347ed t/release-pod-coverage.t
 SHA1 b30cbdfaf935017c4568c0c91b242438cb87786e t/release-pod-syntax.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk2UoXoACgkQTd+EWiaICwqd7gCfeGKwD56RbrgNKEoaRSxSoqUU
-uZQAoJtchEesFYwes5I8WDTjc5VOxkea
-=4+s+
+iEYEARECAAYFAk5x1HoACgkQTd+EWiaICwpiAgCffc15ZveEr6vc8q/1F12rg/sU
+tvkAn1ZECA4a93rFotSF2O6G8doEf5x3
+=5/7R
 -----END PGP SIGNATURE-----

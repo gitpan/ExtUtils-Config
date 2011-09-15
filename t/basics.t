@@ -2,7 +2,7 @@
 
 use strict;
 use warnings FATAL => 'all';
-use Test::More tests => 10;
+use Test::More 0.88;
 
 use Config;
 
@@ -12,9 +12,13 @@ is(ExtUtils::Config->get('config_args'), $Config{config_args}, "'config_args' is
 
 my $config = ExtUtils::Config->new;
 
-is($config->get('config_args'), $Config{config_args}, "'config_args' is the same for \$config");
+ok($config->exists('config_args'), "'config_args' is set");
+is($config->get('config_args'), $Config{config_args}, "'config_args' is the same for \$Config");
 
-ok(!defined $config->get('nonexistent'), "'nonexistent' is nonexistent");
+ok(!ExtUtils::Config->exists('nonexistent'), "'nonexistent' is nonexistent");
+ok(!$config->exists('nonexistent'), "'nonexistent' is still nonexistent");
+
+ok(!defined $config->get('nonexistent'), "'nonexistent' is not defined");
 
 is_deeply($config->all_config, \%Config, 'all_config is \%Config');
 
@@ -39,6 +43,12 @@ is($config->get('more'), 'more2', "'more' is now 'more2");
 $config->pop('more');
 is($config->get('more'), 'more1', "'more' is now 'more1");
 
+my $set = $config->values_set;
+$set->{more} = 'more3';
+is($config->get('more'), 'more1', "more is still 'more1'");
+
 my $config2 = ExtUtils::Config->new({ more => 'more3' });
 
 is_deeply($config2->values_set, { more => 'more3' }, "\$config2 has 'more' set to 'more3'");
+
+done_testing;

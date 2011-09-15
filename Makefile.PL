@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.006; }
+use 5.006;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
@@ -12,19 +12,23 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'A wrapper for perl\'s configuration',
   'AUTHOR' => 'Ken Williams <kwilliams@cpan.org>, Leon Timmermans <leont@cpan.org>',
   'BUILD_REQUIRES' => {
-    'Test::More' => '0'
+    'File::Find' => '0',
+    'File::Temp' => '0',
+    'Test::More' => '0.88'
   },
   'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+    'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'ExtUtils-Config',
   'EXE_FILES' => [],
   'LICENSE' => 'perl',
   'NAME' => 'ExtUtils::Config',
   'PREREQ_PM' => {
-    'Config' => '0'
+    'Config' => '0',
+    'strict' => '0',
+    'warnings' => '0'
   },
-  'VERSION' => '0.002',
+  'VERSION' => '0.003',
   'test' => {
     'TESTS' => 't/*.t'
   }

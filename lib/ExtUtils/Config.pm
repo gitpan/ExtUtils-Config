@@ -1,6 +1,6 @@
 package ExtUtils::Config;
 BEGIN {
-  $ExtUtils::Config::VERSION = '0.002';
+  $ExtUtils::Config::VERSION = '0.003';
 }
 
 use strict;
@@ -26,6 +26,11 @@ sub set {
 	$self->{values}{$key} = $val;
 }
 
+sub exists {
+	my ($self, $key) = @_;
+	return (ref $self && exists $self->{values}{$key}) || exists $Config{$key};
+}
+
 sub push {
 	my ($self, $key, $val) = @_;
 	push @{$self->{stack}{$key}}, $self->{values}{$key} if exists $self->{values}{$key};
@@ -47,7 +52,7 @@ sub pop {
 sub values_set {
 	my $self = shift;
 	return undef unless ref($self);
-	return $self->{values};
+	return { %{$self->{values}} };
 }
 
 sub all_config {
@@ -68,7 +73,7 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -88,6 +93,10 @@ Create a new ExtUtils::Config object. The values in C<\%config> are used to init
 =head2 get($key)
 
 Get the value of C<$key>. If not overriden it will return the value in %Config.
+
+=head2 exists($key)
+
+Tests for the existence of $key in either 
 
 =head2 set($key, $value)
 
