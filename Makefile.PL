@@ -9,28 +9,28 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'A wrapper for perl\'s configuration',
-  'AUTHOR' => 'Ken Williams <kwilliams@cpan.org>, Leon Timmermans <leont@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'Test::More' => '0.88'
+  "ABSTRACT" => "A wrapper for perl's configuration",
+  "AUTHOR" => "Ken Williams <kwilliams\@cpan.org>, Leon Timmermans <leont\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "Test::More" => "0.88"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'ExtUtils-Config',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'ExtUtils::Config',
-  'PREREQ_PM' => {
-    'Config' => '0',
-    'strict' => '0',
-    'warnings' => '0'
+  "DISTNAME" => "ExtUtils-Config",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "ExtUtils::Config",
+  "PREREQ_PM" => {
+    "Config" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.003',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.004",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

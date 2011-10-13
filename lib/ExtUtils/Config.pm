@@ -1,6 +1,6 @@
 package ExtUtils::Config;
-BEGIN {
-  $ExtUtils::Config::VERSION = '0.003';
+{
+  $ExtUtils::Config::VERSION = '0.004';
 }
 
 use strict;
@@ -73,7 +73,7 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
