@@ -1,6 +1,6 @@
 package ExtUtils::Config;
 {
-  $ExtUtils::Config::VERSION = '0.004';
+  $ExtUtils::Config::VERSION = '0.005';
 }
 
 use strict;
@@ -10,15 +10,13 @@ use Config;
 sub new {
 	my ($pack, $args) = @_;
 	return bless {
-		stack => {},
-		values => $args || {},
+		values => ($args ? { %$args } : {}),
 	}, $pack;
 }
 
 sub get {
 	my ($self, $key) = @_;
-	return $self->{values}{$key} if ref($self) && exists $self->{values}{$key};
-	return $Config{$key};
+	return exists $self->{values}{$key} ? $self->{values}{$key} : $Config{$key};
 }
 
 sub set {
@@ -26,39 +24,24 @@ sub set {
 	$self->{values}{$key} = $val;
 }
 
+sub clear {
+	my ($self, $key) = @_;
+	return delete $self->{values}{$key};
+}
+
 sub exists {
 	my ($self, $key) = @_;
-	return (ref $self && exists $self->{values}{$key}) || exists $Config{$key};
-}
-
-sub push {
-	my ($self, $key, $val) = @_;
-	push @{$self->{stack}{$key}}, $self->{values}{$key} if exists $self->{values}{$key};
-	$self->{values}{$key} = $val;
-}
-
-sub pop {
-	my ($self, $key) = @_;
-
-	my $val = delete $self->{values}{$key};
-	if ( exists $self->{stack}{$key} ) {
-		$self->{values}{$key} = pop @{$self->{stack}{$key}};
-		delete $self->{stack}{$key} unless @{$self->{stack}{$key}};
-	}
-
-	return $val;
+	return exists $self->{values}{$key} || exists $Config{$key};
 }
 
 sub values_set {
 	my $self = shift;
-	return undef unless ref($self);
 	return { %{$self->{values}} };
 }
 
 sub all_config {
 	my $self = shift;
-	my $v = ref($self) ? $self->{values} : {};
-	return {%Config, %$v};
+	return { %Config, %{ $self->{values}} };
 }
 
 1;
@@ -73,7 +56,7 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -96,19 +79,15 @@ Get the value of C<$key>. If not overriden it will return the value in %Config.
 
 =head2 exists($key)
 
-Tests for the existence of $key in either 
+Tests for the existence of $key in either .
 
 =head2 set($key, $value)
 
 Set/override the value of C<$key> to C<$value>.
 
-=head2 push($key, $value)
+=head2 clear($key)
 
-Set the value of C<$key> to C<$value> until the next C<pop> of that key.
-
-=head2 pop($key)
-
-Reset C<$key> to the value it had before the last C<push>.
+Reset the value of C<$key> to its original value.
 
 =head2 values_set
 
