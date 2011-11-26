@@ -1,6 +1,6 @@
 package ExtUtils::Config;
 {
-  $ExtUtils::Config::VERSION = '0.005';
+  $ExtUtils::Config::VERSION = '0.006';
 }
 
 use strict;
@@ -12,6 +12,11 @@ sub new {
 	return bless {
 		values => ($args ? { %$args } : {}),
 	}, $pack;
+}
+
+sub clone {
+	my $self = shift;
+	return __PACKAGE__->new($self->{values});
 }
 
 sub get {
@@ -56,7 +61,7 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -79,7 +84,7 @@ Get the value of C<$key>. If not overriden it will return the value in %Config.
 
 =head2 exists($key)
 
-Tests for the existence of $key in either .
+Tests for the existence of $key.
 
 =head2 set($key, $value)
 
@@ -96,6 +101,10 @@ Get a hashref of all overridden values.
 =head2 all_config
 
 Get a hashref of the complete configuration, including overrides.
+
+=head2 clone
+
+Clone the current configuration object.
 
 =head1 AUTHORS
 
