@@ -25,10 +25,11 @@ my %WriteMakefileArgs = (
   "NAME" => "ExtUtils::Config",
   "PREREQ_PM" => {
     "Config" => 0,
+    "Data::Dumper" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.006",
+  "VERSION" => "0.007",
   "test" => {
     "TESTS" => "t/*.t"
   }

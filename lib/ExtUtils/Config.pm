@@ -1,11 +1,12 @@
 package ExtUtils::Config;
 {
-  $ExtUtils::Config::VERSION = '0.006';
+  $ExtUtils::Config::VERSION = '0.007';
 }
 
 use strict;
 use warnings;
 use Config;
+use Data::Dumper ();
 
 sub new {
 	my ($pack, $args) = @_;
@@ -27,11 +28,15 @@ sub get {
 sub set {
 	my ($self, $key, $val) = @_;
 	$self->{values}{$key} = $val;
+	delete $self->{serialized};
+	return;
 }
 
 sub clear {
 	my ($self, $key) = @_;
-	return delete $self->{values}{$key};
+	delete $self->{values}{$key};
+	delete $self->{serialized};
+	return;
 }
 
 sub exists {
@@ -49,6 +54,11 @@ sub all_config {
 	return { %Config, %{ $self->{values}} };
 }
 
+sub serialize {
+	my $self = shift;
+	return $self->{serialized} ||= Data::Dumper->new([$self->values_set])->Terse(1)->Sortkeys(1)->Dump;
+}
+
 1;
 
 
@@ -61,7 +71,7 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
@@ -94,17 +104,21 @@ Set/override the value of C<$key> to C<$value>.
 
 Reset the value of C<$key> to its original value.
 
-=head2 values_set
+=head2 values_set()
 
 Get a hashref of all overridden values.
 
-=head2 all_config
+=head2 all_config()
 
 Get a hashref of the complete configuration, including overrides.
 
-=head2 clone
+=head2 clone()
 
 Clone the current configuration object.
+
+=head2 serialize()
+
+This method serializes the object to some kind of string.
 
 =head1 AUTHORS
 
