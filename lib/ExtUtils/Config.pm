@@ -1,8 +1,5 @@
 package ExtUtils::Config;
-{
-  $ExtUtils::Config::VERSION = '0.007';
-}
-
+$ExtUtils::Config::VERSION = '0.008';
 use strict;
 use warnings;
 use Config;
@@ -15,28 +12,9 @@ sub new {
 	}, $pack;
 }
 
-sub clone {
-	my $self = shift;
-	return __PACKAGE__->new($self->{values});
-}
-
 sub get {
 	my ($self, $key) = @_;
 	return exists $self->{values}{$key} ? $self->{values}{$key} : $Config{$key};
-}
-
-sub set {
-	my ($self, $key, $val) = @_;
-	$self->{values}{$key} = $val;
-	delete $self->{serialized};
-	return;
-}
-
-sub clear {
-	my ($self, $key) = @_;
-	delete $self->{values}{$key};
-	delete $self->{serialized};
-	return;
 }
 
 sub exists {
@@ -61,9 +39,13 @@ sub serialize {
 
 1;
 
+# ABSTRACT: A wrapper for perl's configuration
 
+__END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -71,16 +53,16 @@ ExtUtils::Config - A wrapper for perl's configuration
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
  my $config = ExtUtils::Config->new();
- $config->set('installsitelib', "$ENV{HOME}/lib");
+ $config->get('installsitelib');
 
 =head1 DESCRIPTION
 
-ExtUtils::Config is an abstraction around the %Config hash.
+ExtUtils::Config is an abstraction around the %Config hash. By itself it is not a particularly interesting module by any measure, however it ties together a family of modern toolchain modules.
 
 =head1 METHODS
 
@@ -90,19 +72,11 @@ Create a new ExtUtils::Config object. The values in C<\%config> are used to init
 
 =head2 get($key)
 
-Get the value of C<$key>. If not overriden it will return the value in %Config.
+Get the value of C<$key>. If not overridden it will return the value in %Config.
 
 =head2 exists($key)
 
 Tests for the existence of $key.
-
-=head2 set($key, $value)
-
-Set/override the value of C<$key> to C<$value>.
-
-=head2 clear($key)
-
-Reset the value of C<$key> to its original value.
 
 =head2 values_set()
 
@@ -111,10 +85,6 @@ Get a hashref of all overridden values.
 =head2 all_config()
 
 Get a hashref of the complete configuration, including overrides.
-
-=head2 clone()
-
-Clone the current configuration object.
 
 =head2 serialize()
 
@@ -142,9 +112,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
-# ABSTRACT: A wrapper for perl's configuration
-
